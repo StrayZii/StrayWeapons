@@ -1,0 +1,291 @@
+# MiniMessage only (we're sorry)
+#
+# ======================= РЕЦЕПТЫ =======================
+# У каждого оружия есть секция recipe (настраивайте её под себя):
+#   enabled:     true / false - включить или выключить рецепт
+#   shape:       до 3 строк по 3 символа (все строки одной длины). Пробел = пустая клетка
+#   ingredients: буква -> материал (названия как в Material, например NETHERITE_INGOT)
+#
+# Каждое оружие можно скрафтить ТОЛЬКО ОДИН РАЗ на весь сервер.
+# После этого рецепт не работает, пока не выполнить /sw reset <оружие>.
+# Состояние хранится в plugins/StrayWeapons/data.yml
+# После правок рецептов: /sw reload
+#
+# Рецепты ниже - ПРИМЕРЫ, замените на свои.
+
+weapons:
+  trial_sword:
+    display-name: "<b><color:#c16746>Меч Испытаний</color></b>"
+    material: "NETHERITE_SWORD"
+    attack-damage-buff: 1 # Урон незеритового меча (8) + 1 = 9.
+    ability-cooldown: 30
+    recipe:
+      enabled: true
+      shape:
+        - "ABA"
+        - "ABA"
+        - " C "
+      ingredients:
+        A: COPPER_BLOCK
+        B: NETHERITE_INGOT
+        C: BREEZE_ROD
+    # Placeholders:
+    # $ability -> Ability Cooldown
+    lore:
+      - "<gray>Выкован из меди древних Палат Испытаний,</gray>"
+      - "<gray>где тысячу лет проверяли волю смельчаков.</gray>"
+      - "<gray>Говорят, он выбирает того, кто не отступит.</gray>"
+      - ""
+      - "<color:#c16746>Способность:</color>"
+      - "<gray>Раз в $ability сек. толкает вас в сторону куда</gray>"
+      - "<gray>вы смотрите. (во все стороны)</gray>"
+      - ""
+
+  stun_axe:
+    display-name: "<b><color:#92887D>Топор Оглушения</color></b>"
+    material: "NETHERITE_AXE"
+    attack-damage-buff: 1 # Урон незеритового топора (10) + 1 = 11.
+    ability-cooldown: 30  # Перезарядка после успешного оглушения (сек.)
+    stun-chance: 5        # Шанс оглушения при крите (%)
+    stun-duration: 1.5    # Длительность оглушения (сек.)
+    recipe:
+      enabled: true
+      shape:
+        - "ABA"
+        - "ACA"
+        - " C "
+      ingredients:
+        A: NETHERITE_INGOT
+        B: HEAVY_CORE
+        C: BREEZE_ROD
+    # Placeholders:
+    # $ability -> Ability Cooldown
+    # $chance -> Stun Chance
+    # $duration -> Stun Duration
+    lore:
+      - "<gray>Этот молот высекли из камня, упавшего с неба,</gray>"
+      - "<gray>и он раскололся от первого же удара.</gray>"
+      - "<gray>Один точный выпад — и враг слышит лишь тишину.</gray>"
+      - ""
+      - "<color:#92887D>Способность:</color>"
+      - "<gray>При крите с шансом </gray><color:#92887D>$chance%</color><gray> замораживает</gray>"
+      - "<gray>противника на </gray><color:#92887D>$durationс</color><gray>. Перезарядка: </gray><color:#92887D>$abilityс</color>"
+      - ""
+
+  jungle_spear:
+    display-name: "<b><color:#5FAE46>Жало Джунглей</color></b>"
+    material: "NETHERITE_SPEAR"
+    attack-damage-buff: 0 # 0 = ванильный урон незеритового копья
+    ability-cooldown: 25  # Перезарядка выстрела (сек.)
+    projectile-speed: 1.4 # Скорость заряда (блоков за тик)
+    projectile-range: 40  # Дальность заряда (блоков)
+    poison-level: 2       # Уровень отравления
+    poison-duration: 5    # Длительность отравления (сек.)
+    speed-level: 2        # Уровень скорости в руке
+    recipe:
+      enabled: true
+      shape:
+        - "  A"
+        - " B "
+        - "B  "
+      ingredients:
+        A: EMERALD_BLOCK
+        B: JUNGLE_LOG
+    # Placeholders:
+    # $ability -> Ability Cooldown
+    # $duration -> Poison Duration
+    # $level -> Poison Level
+    # $speed -> Speed Level
+    lore:
+      - "<gray>Племя Зелёной Лозы закалило наконечник в яде</gray>"
+      - "<gray>лесной гадюки и обвило древко живой лианой.</gray>"
+      - "<gray>Тот, кто берёт копьё, слышит шёпот листвы.</gray>"
+      - ""
+      - "<color:#5FAE46>Способность (ПКМ):</color>"
+      - "<gray>Выпускает ядовитый заряд. При попадании</gray>"
+      - "<gray>в игрока даёт </gray><color:#5FAE46>Отравление $level</color><gray> на </gray><color:#5FAE46>$durationс</color>"
+      - "<gray>Перезарядка: </gray><color:#5FAE46>$abilityс</color>"
+      - ""
+      - "<color:#5FAE46>Пассивно:</color>"
+      - "<gray>В руке даёт </gray><color:#5FAE46>Скорость $speed</color>"
+      - ""
+
+  poseidon_trident:
+    display-name: "<b><color:#35B6D8>Трезубец Посейдона</color></b>"
+    material: "TRIDENT"
+    attack-damage-buff: 1       # Урон трезубца (9) + 1 = 10. Скорость атаки как у меча.
+    shield-disable-duration: 5  # На сколько секунд отключается щит цели (сек.)
+    riptide-level: 3            # Уровень Тягуна (1-3). Бросить трезубец нельзя, рывок работает в воде/под дождём
+    recipe:
+      enabled: true
+      shape:
+        - "ABA"
+        - " C "
+        - " C "
+      ingredients:
+        A: NAUTILUS_SHELL
+        B: HEART_OF_THE_SEA
+        C: PRISMARINE_BRICKS
+    # Placeholders:
+    # $shield -> Shield Disable Duration
+    lore:
+      - "<gray>Тонущие корабли звали его в бурю, и однажды</gray>"
+      - "<gray>море ответило: волна выбросила трезубец на берег.</gray>"
+      - "<gray>Он помнит каждую бурю и не прощает щитов.</gray>"
+      - ""
+      - "<color:#35B6D8>Способность:</color>"
+      - "<gray>Удар по игроку с поднятым щитом</gray>"
+      - "<gray>отключает щит на </gray><color:#35B6D8>$shieldс</color>"
+      - ""
+      - "<color:#35B6D8>Тягун:</color>"
+      - "<gray>Бросить нельзя. В воде или под дождём</gray>"
+      - "<gray>зажмите ПКМ, чтобы рвануть вперёд.</gray>"
+      - ""
+  thor_hammer:
+    display-name: "<b><color:#7EC8F0>Молот Тора</color></b>"
+    material: "MACE"
+    attack-damage-buff: 3   # Булава (6) + 3 = 9
+    ability-cooldown: 45    # Перезарядка (сек.)
+    ability-range: 30       # Дальность наведения молнии (блоков)
+    ability-damage: 8       # Урон молнии
+    ability-radius: 3.5     # Радиус поражения (блоков)
+    smash-damage-multiplier: 1.2  # Урон smash-атаки (удар булавой с падения): 1.2 = +20%
+    recipe:
+      enabled: true
+      shape:
+        - "A"
+        - "B"
+      ingredients:
+        A: thor_head        # кастомный предмет (секция items ниже), а не материал
+        B: BREEZE_ROD
+    # Placeholders:
+    # $ability -> Ability Cooldown
+    # $damage -> Ability Damage
+    # $radius -> Ability Radius
+    # $range -> Ability Range
+    # $smash -> Smash Damage Bonus (%)
+    lore:
+      - "<gray>Выкован из осколков небесной грозы</gray>"
+      - "<gray>и закалён ветром Палат Испытаний.</gray>"
+      - "<gray>Достоин лишь тот, кто не боится грома.</gray>"
+      - ""
+      - "<color:#7EC8F0>Способность:</color>"
+      - "<gray>Обрушивает молнию в точку прицела</gray>"
+      - "<gray>(до </gray><color:#7EC8F0>$rangeм</color><gray>). Урон: </gray><color:#7EC8F0>$damage</color><gray>, радиус: </gray><color:#7EC8F0>$radiusм</color>"
+      - "<gray>Перезарядка: </gray><color:#7EC8F0>$abilityс</color>"
+      - ""
+      - "<color:#7EC8F0>Пассивно:</color>"
+      - "<gray>Smash-атака (удар с падения) наносит</gray>"
+      - "<gray>на </gray><color:#7EC8F0>$smash%</color><gray> больше урона</gray>"
+      - ""
+
+  void_scythe:
+    display-name: "<b><color:#A13E91>Коса Пустоты</color></b>"
+    material: "NETHERITE_HOE"
+    item-model: "strayweapons:void_scythe" # Модель косы из ресурспака StrayWeapons
+    attack-damage-buff: 0   # Урон незеритового меча (8) + 1 = 9
+    ability-cooldown: 25    # Перезарядка после удачного притягивания (сек.)
+    miss-cooldown: 2        # Короткая перезарядка при промахе (сек.)
+    pull-range: 15          # Дальность захвата (блоков)
+    pull-speed: 1.2         # Скорость притягивания (блоков за тик)
+    pull-stop-distance: 2.0 # На каком расстоянии от вас цель останавливается
+    harvest-heal: 4         # Лечение за убийство игрока (HP, 4 = 2 сердца)
+    recipe:
+      enabled: true
+      shape:
+        - "AAB"
+        - " C "
+        - " C "
+      ingredients:
+        A: ENDER_EYE
+        B: NETHERITE_INGOT
+        C: END_ROD
+    # Placeholders:
+    # $ability -> Ability Cooldown
+    # $range -> Pull Range
+    # $hearts -> Harvest Heal (в сердцах)
+    lore:
+      - "<gray>Её выковали из осколка острова, сорвавшегося</gray>"
+      - "<gray>в Бездну. Те, кого она заберёт, не успевают</gray>"
+      - "<gray>даже крикнуть.</gray>"
+      - ""
+      - "<color:#A13E91>Способность (ПКМ):</color>"
+      - "<gray>Притягивает игрока в прицеле (до </gray><color:#A13E91>$rangeм</color><gray>)</gray>"
+      - "<gray>Перезарядка: </gray><color:#A13E91>$abilityс</color>"
+      - ""
+      - "<color:#A13E91>Жатва:</color>"
+      - "<gray>За убийство игрока лечит на </gray><color:#A13E91>$hearts ❤</color>"
+      - ""
+
+items:
+  lightning_shard:
+    display-name: "<b><color:#FFE14D>Осколок молнии</color></b>"
+    material: "AMETHYST_SHARD"
+    lore:
+      - "<gray>Застывший отблеск небесной грозы.</gray>"
+      - "<gray>Соедини </gray><color:#FFE14D>9</color><gray> осколков, чтобы создать</gray>"
+      - "<gray>навершие Тора.</gray>"
+ 
+  thor_head:
+    display-name: "<b><color:#7EC8F0>Навершие Тора</color></b>"
+    material: "NETHERITE_SCRAP"
+    recipe:
+      enabled: true
+      shard-count: 9
+    # Placeholders:
+    # $count -> Shard Count
+    lore:
+      - "<gray>Собрано из </gray><color:#FFE14D>$count</color><gray> осколков молнии.</gray>"
+      - "<gray>Положи сверху </gray><color:#7EC8F0>палки бриза</color><gray>,</gray>"
+      - "<gray>чтобы создать Молот Тора.</gray>"
+
+messages:
+  prefix: "<color:#4498DB>ᴡᴇᴀᴘᴏɴs</color> <gray>»</gray>"
+
+  # Placeholders:
+  # $prefix -> the prefix. -.-
+
+  usage: "$prefix <gray>Использование:</gray> <color:#4498DB>/strayweapons <get <оружие> | reset <оружие> | reload></color>"
+  no-permission: "$prefix <red>У вас нет прав на это действие.</red>"
+  player-only: "$prefix <red>Эту команду может использовать только игрок.</red>"
+  item-error: "$prefix <red>Не удалось создать предмет, проверьте конфиг.</red>"
+  reloaded: "$prefix <gray>Конфиг перезагружен.</gray>"
+
+  # Placeholders:
+  # $weapon -> the name of the weapon
+  unknown-weapon: "$prefix <red>Оружие</red> <white>$weapon</white> <red>не найдено.</red>"
+  weapon-given: "$prefix <gray>Вы получили</gray> $weapon<gray>.</gray>"
+
+  # Крафт легендарок
+  # Placeholders:
+  # $weapon -> the name of the weapon
+  # $player -> the crafter
+  reset-done: "$prefix <gray>Крафт</gray> $weapon <gray>снова доступен.</gray>"
+  reset-not-needed: "$prefix $weapon <gray>ещё не создавали, его и так можно скрафтить.</gray>"
+  craft-shift: "$prefix <red>Легендарное оружие нельзя крафтить через Shift. Кликните по результату обычным кликом.</red>"
+  on-craft: "$prefix <gray>Вы создали легендарное оружие</gray> $weapon<gray>!</gray>"
+  # Оставьте пустым (""), чтобы не объявлять крафт на весь сервер
+  craft-broadcast: "$prefix <white>$player</white> <gray>создал легендарное оружие</gray> $weapon<gray>! Больше его скрафтить нельзя.</gray>"
+
+  # Перезарядка оружия показывается в экшн-баре (без префикса), чат не спамится.
+  # Placeholders:
+  # $remaining -> remaining cooldown of the weapon
+  # $weapon -> the name of the weapon
+  on-cooldown: "$weapon <gray>перезаряжается:</gray> <white>$remainingс</white>"
+
+  # Placeholders:
+  # $target -> the player who got stunned.
+  # $duration -> stun duration
+  on-stun: "$prefix <gray>Вы оглушили игрока <color:#4498DB>$target</color>! Он не сможет двигаться</gray> <color:#4498DB>$durationс</color>"
+
+  # Placeholders:
+  # $target -> the player who got poisoned.
+  on-poison: "$prefix <gray>Вы отравили игрока <color:#5FAE46>$target</color>!</gray>"
+
+  # Placeholders:
+  # $target -> the player who got pulled.
+  on-pull: "$prefix <gray>Вы притянули игрока <color:#A13E91>$target</color>!</gray>"
+
+  # Жатва - показывается в экшн-баре. Placeholders:
+  # $hearts -> restored hearts
+  on-harvest: "<color:#A13E91>Жатва:</color> <red>+$hearts ❤</red>"

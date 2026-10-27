@@ -1,0 +1,21 @@
+name: StrayWeapons
+version: '1.2'
+main: org.strayzii.strayWeapons.StrayWeapons
+api-version: '1.21'
+
+commands:
+  strayweapons:
+    description: Управление оружием StrayWeapons
+    usage: /<command> <get|reset|reload>
+    aliases: [sw]
+
+permissions:
+  strayweapons.get:
+    description: Получение оружия
+    default: op
+  strayweapons.reset:
+    description: Сброс лимита крафта легендарок
+    default: op
+  strayweapons.reload:
+    description: Перезагрузка конфига
+    default: op
